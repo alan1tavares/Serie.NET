@@ -69,46 +69,21 @@ namespace DIO.Series
 
     private static void AtualizaSerie()
     {
-      /*
-        TODO:
-          A entrada do usuário é o mesmo que o de inserir série
-          Então isso pode ser mehorado
-      */
       Console.Write("Digite o id da serie: ");
       int indiceSerie = int.Parse(Console.ReadLine());
-
-      foreach (int i in Enum.GetValues(typeof(Genero)))
-      {
-        Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
-      }
-
-      Console.Write("Dgite o gênero entre as opções acima: ");
-      int entradaGenero = int.Parse(Console.ReadLine());
-
-      Console.Write("Digite o titulo da série: ");
-      string entradaTitulo = Console.ReadLine();
-
-      Console.Write("Digite o ano de incício da série: ");
-      int entradaAno = int.Parse(Console.ReadLine());
-
-      Console.Write("Digite a descrição da série: ");
-      string entradaDescricao = Console.ReadLine();
-
-      var atualizaSerie = new Serie(
-        id: indiceSerie,
-        genero: (Genero)entradaGenero,
-        titulo: entradaTitulo,
-        ano: entradaAno,
-        descricao: entradaDescricao
-      );
-
+      var atualizaSerie = GetSerieAAprtirDaEntradaDoUsuario(indiceSerie);
       repositorio.Atualiza(indiceSerie, atualizaSerie);
     }
 
     private static void InserirSerie()
     {
       Console.WriteLine("Inserir nova série");
+      var novaSerie = GetSerieAAprtirDaEntradaDoUsuario(repositorio.ProximoId());
+      repositorio.Insere(novaSerie);
+    }
 
+    private static Serie GetSerieAAprtirDaEntradaDoUsuario(int indiceSerie)
+    {
       foreach (int i in Enum.GetValues(typeof(Genero)))
       {
         Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
@@ -126,15 +101,13 @@ namespace DIO.Series
       Console.Write("Digite a descrição da série: ");
       string entradaDescricao = Console.ReadLine();
 
-      var novaSerie = new Serie(
-        id: repositorio.ProximoId(),
+      return new Serie(
+        id: indiceSerie,
         genero: (Genero)entradaGenero,
         titulo: entradaTitulo,
         ano: entradaAno,
         descricao: entradaDescricao
       );
-
-      repositorio.Insere(novaSerie);
     }
 
     private static void ListaSerie()
