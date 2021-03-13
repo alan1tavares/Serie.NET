@@ -56,15 +56,27 @@ namespace DIO.Series
 
     private static void ExcluiSerie()
     {
-      /*
-        TODO:
-          Colocar uma confirmação para evitar que o usuário exclua sem querer.
-          Sugestão, deseja mesmo excluir essa série #####
-      */
+
       Console.Write("Digite o id da série: ");
       int indiceSerie = int.Parse(Console.ReadLine());
 
-      repositorio.Exclui(indiceSerie);
+      var serie = repositorio.RetornaPorId(indiceSerie);
+      Console.WriteLine("Tem certeza que gostaria de excluir a série abaixo?");
+      Console.WriteLine(serie);
+
+      Console.Write("S/N: ");
+      var confirmacao = Console.ReadLine().ToUpper();
+
+      if (confirmacao == "S")
+      {
+        repositorio.Exclui(indiceSerie);
+        Console.WriteLine("\nSérie foi excluída com sucesso.");
+      }
+      else
+      {
+        Console.WriteLine("\nSérie não foi excluída.");
+      }
+
     }
 
     private static void AtualizaSerie()

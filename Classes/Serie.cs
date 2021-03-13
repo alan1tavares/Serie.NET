@@ -25,9 +25,9 @@ namespace DIO.Series.Classes
     {
       string retorno = "";
       retorno += "Gênero: " + this.Genero + Environment.NewLine;
-      retorno += "Titulo: " + this.Genero + Environment.NewLine;
-      retorno += "Descrição: " + this.Genero + Environment.NewLine;
-      retorno += "Ano de Inicio: " + this.Genero + Environment.NewLine;
+      retorno += "Titulo: " + this.Titulo + Environment.NewLine;
+      retorno += "Descrição: " + this.Descricao + Environment.NewLine;
+      retorno += "Ano de Inicio: " + this.Ano + Environment.NewLine;
       retorno += "Excluído: " + this.Excluido + Environment.NewLine;
       return retorno;
     }
